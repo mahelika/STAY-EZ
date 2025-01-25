@@ -18,11 +18,14 @@ Wanderlust is a work-in-progress web application inspired by Airbnb. It allows u
 - **Authentication**: (Add any authentication methods if applicable, e.g., JWT, Passport)
 - **Other Libraries**: Method-Override, EJS-Mate, etc.
 
+## Roadmap
+
 This project is currently in progress, and the following features will be added:
-	•	User authentication and authorization (login, registration, etc.)
-	•	Search and filtering for listings
-	•	User reviews and ratings for accommodations
-	•	Image upload handling (e.g., using cloud services like Cloudinary)
-	•	Enhanced UI and user experience improvements
+
+- User authentication and authorization (login, registration, etc.)
+- Search and filtering for listings
+- User reviews and ratings for accommodations
+- Image upload handling (e.g., using cloud services like Cloudinary)
+- Enhanced UI and user experience improvements
 
 
