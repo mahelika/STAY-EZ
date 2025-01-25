@@ -25,18 +25,4 @@ This project is currently in progress, and the following features will be added:
 	•	Image upload handling (e.g., using cloud services like Cloudinary)
 	•	Enhanced UI and user experience improvements
 
- License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-### Key Sections Explained:
-
-1. **Features**: Describes the main functionality of the app.
-2. **Tech Stack**: Lists the technologies used in the project.
-3. **Installation**: Explains how to set up and run the app locally.
-4. **Roadmap**: Highlights planned features and future improvements.
-5. **Contributing**: Encourages others to contribute to the project.
-6. **License**: Specifies the license (you can replace it with the actual license you choose).
-
-You can further expand the roadmap and installation steps as the project develops.
-
-Let me know if you'd like any changes or further additions!
