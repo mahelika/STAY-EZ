@@ -1,25 +1,46 @@
 <% layout("/layouts/boilerplate")%>
 <body>
     <div class="row mt-3">
-        <div class="col-8 offset-3">
-            <h3> Listing Details: </h3>
+        <div class="col-8 offset-2">
+            <h3>Listing Details:</h3>
+        </div>
     </div>
-        <div class="card col-6 offset-3 show-card">
-            <img src="<%=listing.image.url%>" 
-            class="card-img-top show-img" 
-            alt="listing_img">
+    
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="card show-card">
+                <!-- Image Section with Better Height Control -->
+                <div class="show-img-container">
+                    <img src="<%=listing.image.url%>" 
+                         class="card-img-top show-img" 
+                         alt="listing_img">
+                </div>
 
-            <div class="card-body">
-              <p class="card-text">
-                <b><%= listing.title %></b> <br>
-                <%=listing.description%> <br>
-                &#8377; <%=listing.price.toLocaleString("en-IN")%> <br>
-                <%=listing.location%> <br>
-                <%=listing.country%> <br>
-            </p>
+                <!-- Card Body with Proper Spacing -->
+                <div class="card-body show-card-body">
+                    <div class="listing-header">
+                        <h4 class="listing-title"><%= listing.title %></h4>
+                        <div class="listing-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span><%=listing.location%>, <%=listing.country%></span>
+                        </div>
+                    </div>
+
+                    <div class="listing-description">
+                        <p><%=listing.description%></p>
+                    </div>
+
+                    <div class="listing-price">
+                        <span class="price-amount">₹<%=listing.price.toLocaleString("en-IN")%></span>
+                        <span class="price-period">per night</span>
+                    </div>
+                </div>
             </div>
+        </div>
     </div>
+    
     <br>
+
     
     <div class="btns">
         <a href="/listings/<%=listing._id%>/edit" 

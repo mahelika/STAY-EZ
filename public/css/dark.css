@@ -136,10 +136,12 @@ body {
     box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
 }
 
+
 /* show page */
 .show-img{
     height: 30vh;
     filter: brightness(0.9);
+    margin-bottom: 20px; /* Add space below image */
 }
 
 .btns{
@@ -147,8 +149,20 @@ body {
 }
 
 .show-card{
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 20px; 
+    padding-right: 20px; 
+    padding-top: 20px; 
+    padding-bottom: 20px; 
     background-color: #1a1a1a;
     color: #e0e0e0;
+}
+
+/* Also add some spacing to card body content */
+.show-card .card-body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.show-card .card-text {
+    margin-bottom: 15px; 
 }
