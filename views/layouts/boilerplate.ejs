@@ -14,13 +14,53 @@
     referrerpolicy="no-referrer" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" 
-rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" 
+    rel="stylesheet">
    
-    <link rel="stylesheet" href="/css/style.css" />
+    <!-- Theme CSS will be loaded dynamically -->
+    <link id="theme-css" rel="stylesheet" href="/css/light.css" />
+    
+    <!-- Base styles for theme toggle button -->
+    <style>
+        /* Theme Toggle Button */
+        .theme-toggle-btn {
+            background: none;
+            border: 2px solid #fe424d;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #fe424d;
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: #fe424d;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .theme-toggle-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Dark theme toggle button styles */
+        [data-theme="dark"] .theme-toggle-btn {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        [data-theme="dark"] .theme-toggle-btn:hover {
+            background-color: #ff6b6b;
+            color: white;
+        }
+    </style>
 </head>
-<body>
+<body data-theme="light">
     <%-include("../includes/navbar.ejs")%>
     <div class="container">
         <%- body %>
@@ -29,6 +69,54 @@ rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
     crossorigin="anonymous"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                // Switch to light theme
+                body.setAttribute('data-theme', 'light');
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'light');
+                loadThemeCSS('light');
+            } else {
+                // Switch to dark theme
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'dark');
+                loadThemeCSS('dark');
+            }
+        }
+
+        // Function to load the appropriate CSS file
+        function loadThemeCSS(theme) {
+            const themeLink = document.getElementById('theme-css');
+            themeLink.href = `/css/${theme}.css`;
+        }
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            
+            body.setAttribute('data-theme', savedTheme);
+            
+            if (savedTheme === 'dark') {
+                themeIcon.className = 'fas fa-moon';
+            } else {
+                themeIcon.className = 'fas fa-sun';
+            }
+            
+            loadThemeCSS(savedTheme);
+        });
+    </script>
+    
     <script src="/js/script.js"></script>
 </body>
 </html>
