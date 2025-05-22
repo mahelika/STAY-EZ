@@ -39,16 +39,17 @@
         </div>
     </div>
     
-    <br>
+   <div class="row">
+    <div class="col-8 offset-2">
+        <div class="btns">
+            <a href="/listings/<%=listing._id%>/edit" 
+                class="btn edit-btn">
+                Edit</a>
 
-    
-    <div class="btns">
-        <a href="/listings/<%=listing._id%>/edit" 
-            class="btn btn-dark col-1 offset-3 edit-btn" >
-            Edit</a>
-
-        <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-            <button class="btn btn-dark offset-5">Delete</button>
-        </form>
+            <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
+                <button class="btn btn-dark" type="submit">Delete</button>
+            </form>
+        </div>
     </div>
+</div>
 </body>

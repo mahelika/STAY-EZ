@@ -146,6 +146,20 @@ body {
 
 .btns{
     display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btns .btn {
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 500;
+    min-width: 100px;
+}
+
+.btns form {
+    margin: 0;
 }
 
 .show-card{
@@ -157,7 +171,7 @@ body {
     color: #e0e0e0;
 }
 
-/* Also add some spacing to card body content */
+
 .show-card .card-body {
     padding-left: 0 !important;
     padding-right: 0 !important;
