@@ -7,6 +7,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
+const ExpressError = require("./utils/ExpressError.js");
 
 main().then(() => {
     console.log("connected to database.")
@@ -110,8 +111,13 @@ app.delete("/listings/:id", async (req, res)=> {
 //     res.send("testing successful."); 
 // });
 
+app.all("*", (req, res, next)=> {
+    next(new ExpressError(404, "Page Not Found!"));
+})
+
 app.use((err, req, res, next)=> {
-    res.send("something went wrong.");
+    let {statusCode, message} = err;
+    res.status(statusCode).send(message);
 })
 
 
