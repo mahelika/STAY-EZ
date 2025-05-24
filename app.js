@@ -40,11 +40,11 @@ app.get("/listings/new", (req,res)=> {
 });
 
 //show route
-app.get("/listings/:id", async(req, res)=> {
+app.get("/listings/:id", wrapAsync(async(req, res)=> {
     let { id } = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/show.ejs", {listing}); 
-});
+}));
 
 //create route
 app.post(
@@ -57,11 +57,11 @@ app.post(
 );
 
 //edit route
-app.get("/listings/:id/edit", async(req, res)=> {
+app.get("/listings/:id/edit", wrapAsync(async(req, res)=> {
     let {id} = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/edit.ejs",{listing});
-});
+}));
 
 //update route
 // app.put("/listings/:id", async (req, res)=>{
@@ -69,7 +69,7 @@ app.get("/listings/:id/edit", async(req, res)=> {
 //     await Listing.findByIdAndUpdate(id, {...req.body.listing});
 //     res.redirect(`/listings/${id}`);
 // });
-app.put("/listings/:id", async (req, res) => {
+app.put("/listings/:id", wrapAsync(async (req, res) => {
     const { id } = req.params;
   
     // Extract the nested image fields
@@ -86,15 +86,15 @@ app.put("/listings/:id", async (req, res) => {
   
     await Listing.findByIdAndUpdate(id, updatedListing);
     res.redirect(`/listings/${id}`);
-  });
+  }));
 
 //delete route
-app.delete("/listings/:id", async (req, res)=> {
+app.delete("/listings/:id", wrapAsync(async (req, res)=> {
     let {id} = req.params;
     let deleted = await Listing.findByIdAndDelete(id);
     console.log(deleted);
     res.redirect("/listings");
-});
+}));
 
 
 // app.get("/testListing", async (req,res)=> {
@@ -116,7 +116,7 @@ app.all("*", (req, res, next)=> {
 })
 
 app.use((err, req, res, next)=> {
-    let {statusCode, message} = err;
+    let {statusCode=500, message="Something went wrong."} = err;
     res.status(statusCode).send(message);
 })
 
