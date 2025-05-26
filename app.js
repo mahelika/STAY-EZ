@@ -8,6 +8,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
+const {listingSchema} = require("./schema.js");
 
 main().then(() => {
     console.log("connected to database.")
@@ -28,6 +29,15 @@ app.get("/", (req,res)=> {
     res.send("hi i am groot.");
 });
 
+const validateListing = (req,res,next) => {
+    let {error} = listingSchema.validate(req.body);
+    if(error){
+        let errMsg = error.details.map((el) => el.message).join(".");
+        throw new ExpressError(400, errMsg);
+    } else {
+        next();
+    }
+}
 //index route
 app.get("/listings", async(req,res)=>{
     const allListings = await Listing.find({});
@@ -48,11 +58,9 @@ app.get("/listings/:id", wrapAsync(async(req, res)=> {
 
 //create route
 app.post(
-  "/listings",
+  "/listings", 
+  validateListing,
   wrapAsync(async (req, res, next) => {
-    if(!req.body.listing){
-        throw new ExpressError(400, "Send valid data for listing.");
-    }
     const newListing = new Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listings");
@@ -72,7 +80,9 @@ app.get("/listings/:id/edit", wrapAsync(async(req, res)=> {
 //     await Listing.findByIdAndUpdate(id, {...req.body.listing});
 //     res.redirect(`/listings/${id}`);
 // });
-app.put("/listings/:id", wrapAsync(async (req, res) => {
+app.put("/listings/:id", 
+    validateListing,
+    wrapAsync(async (req, res) => {
     const { id } = req.params;
   
     // Extract the nested image fields
