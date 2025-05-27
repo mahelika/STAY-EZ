@@ -2,7 +2,7 @@
 <body>
     <div class="row mt-3">
         <div class="col-8 offset-2">
-            <h3>Listing Details:</h3>
+            <h3><%= listing.title %></h3>
         </div>
     </div>
     
@@ -19,7 +19,7 @@
                 <!-- Card Body with Proper Spacing -->
                 <div class="card-body show-card-body">
                     <div class="listing-header">
-                        <h4 class="listing-title"><%= listing.title %></h4>
+                        <!-- <h4 class="listing-title"><%= listing.title %></h4> -->
                         <div class="listing-location">
                             <i class="fas fa-map-marker-alt"></i>
                             <span><%=listing.location%>, <%=listing.country%></span>
