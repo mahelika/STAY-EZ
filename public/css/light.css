@@ -177,3 +177,26 @@ body {
 .show-card .card-text {
     margin-bottom: 15px; 
 }
+
+.review-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.review-card .review-comment {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.review-rating .fa-star {
+    color: #ffb400;
+}
+
+.review-author {
+    color: #555;
+    font-weight: 500;
+}

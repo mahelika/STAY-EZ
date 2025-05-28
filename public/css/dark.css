@@ -180,3 +180,30 @@ body {
 .show-card .card-text {
     margin-bottom: 15px; 
 }
+
+.review-card {
+    background-color: #1f1f1f;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.review-card .review-comment {
+    font-style: italic;
+    color: #ccc;
+    margin-bottom: 10px;
+}
+
+.review-rating .fa-star {
+    color: #ffcc00;
+}
+
+/* .text-muted {
+    color: #aaa !important;
+} */
+
+.review-author {
+    color: #e0e0e0;
+    font-weight: 500;
+}
