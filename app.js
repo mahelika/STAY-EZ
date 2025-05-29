@@ -122,7 +122,7 @@ app.delete("/listings/:id", wrapAsync(async (req, res)=> {
 }));
 
 //reviews
-//post route
+//post review route
 app.post("/listings/:id/reviews", validateReview, wrapAsync(async (req, res) => {
     let listing = await Listing.findById(req.params.id);
     let newReview = new Review(req.body.review); // ✅ now using Mongoose model
@@ -132,6 +132,16 @@ app.post("/listings/:id/reviews", validateReview, wrapAsync(async (req, res) => 
     await listing.save();
 
     res.redirect(`/listings/${listing._id}`);
+}));
+
+//delete review route
+app.delete("/listings/:id/reviews/:reviewId", wrapAsync(async (req, res) => {
+    let { id, reviewId } = req.params;
+
+    await Listing.findByIdAndUpdate(id, { $pull: { review: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
+
+    res.redirect(`/listings/${id}`);
 }));
 
 
