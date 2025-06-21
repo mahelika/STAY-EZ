@@ -31,6 +31,10 @@ router.get("/new", (req,res)=> {
 router.get("/:id", wrapAsync(async(req, res)=> {
     let { id } = req.params;
     const listing = await Listing.findById(id).populate("review");
+    if (!listing){
+      req.flash("error", "Listing Not Found!");
+      res.redirect("/listings");
+    }
     res.render("listings/show.ejs", {listing}); 
 }));
 
@@ -45,9 +49,9 @@ router.post(
     // Set default filename or empty string if none present
     if (!listingData.image) listingData.image = {};
     if (!listingData.image.filename) listingData.image.filename = ""; // or a default placeholder
-
     const newListing = new Listing(listingData);
     await newListing.save();
+    req.flash("success", "New Listing Created!"); 
     res.redirect("/listings");
   })
 );
@@ -56,6 +60,10 @@ router.post(
 router.get("/:id/edit", wrapAsync(async(req, res)=> {
     let {id} = req.params;
     const listing = await Listing.findById(id);
+    if (!listing){
+      req.flash("error", "Listing Not Found!");
+      res.redirect("/listings");
+    }
     res.render("listings/edit.ejs",{listing});
 }));
 
@@ -80,6 +88,8 @@ router.put("/:id", validateListing, wrapAsync(async (req, res) => {
   }
 
   await Listing.findByIdAndUpdate(id, updatedListing);
+  
+  req.flash("success", "Listing Updated!");
   res.redirect(`/listings/${id}`);
 }));
 
@@ -90,6 +100,7 @@ router.delete("/:id", wrapAsync(async (req, res)=> {
     let {id} = req.params;
     let deleted = await Listing.findByIdAndDelete(id);
     console.log(deleted);
+    req.flash("success", "Listing Deleted!");
     res.redirect("/listings");
 }));
 
